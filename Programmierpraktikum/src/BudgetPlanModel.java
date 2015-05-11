@@ -11,21 +11,21 @@ import com.opencsv.CSVReader;
 
 public class BudgetPlanModel {
 	List<Posten> ausgaben;
-	
+
 	public BudgetPlanModel() {
 		this.ausgaben = new ArrayList<Posten>();
 		try {
 			CSVReader reader = new CSVReader(new FileReader("data/budget.csv"));
 			String[] nextLine;
-	        while ((nextLine = reader.readNext()) != null) {
-	        DateFormat df = DateFormat.getDateInstance();
+			while ((nextLine = reader.readNext()) != null) {
+				DateFormat df = DateFormat.getDateInstance();
 				Date datum = df.parse(nextLine[0]);
 				String bezeichnung = nextLine[1];
 				double betrag = Double.parseDouble(nextLine[2]);
-				ausgaben.add(new Posten (datum, bezeichnung, betrag));
+				ausgaben.add(new Posten(datum, bezeichnung, betrag));
 			}
-	        reader.close();
-			
+			reader.close();
+
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -35,9 +35,7 @@ public class BudgetPlanModel {
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 	}
-	
-	
 
 }
