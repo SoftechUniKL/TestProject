@@ -9,12 +9,19 @@ import java.util.List;
 
 import com.opencsv.CSVReader;
 
+/**
+ * Datenmodell des Budgetplaners
+ * 
+ * Die Daten werden in der Datei data/budget.csv abgespeichert als CSV-Datei.
+ * 
+ */
 public class BudgetPlanModel {
 	List<Posten> ausgaben;
 
 	public BudgetPlanModel() {
 		this.ausgaben = new ArrayList<Posten>();
 		try {
+			// Zeilenweises Einlesen der Daten
 			CSVReader reader = new CSVReader(new FileReader("data/budget.csv"));
 			String[] nextLine;
 			while ((nextLine = reader.readNext()) != null) {
@@ -26,16 +33,18 @@ public class BudgetPlanModel {
 			}
 			reader.close();
 
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		} catch (FileNotFoundException e) {
+			System.err
+					.println("Die Datei data/budget.csv wurde nicht gefunden!");
+			System.exit(1);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err
+					.println("Probleme beim Oeffnen der Datei data/budget.csv!");
+			System.exit(1);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err
+					.println("Formatfehler: Die Datei konnte nicht eingelesen werden!");
+			System.exit(1);
 		}
 	}
-
 }
